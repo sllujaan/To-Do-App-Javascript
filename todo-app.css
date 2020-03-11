@@ -1,0 +1,87 @@
+:root{
+    --task-width: 70%;
+    --edit-width: 10%;
+    --remove-width: 10%;
+}
+
+.container{
+    background-color: burlywood;
+}
+
+h1{
+    text-align: center;
+    background-color: cadetblue;
+}
+
+.inputs-container{
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.inputs-container-item{
+    background-color: grey;
+    text-align: center;
+    width: 45%;
+    transition: all 1s;
+    padding: 10px;
+}
+
+.task-input, .search-input{
+    max-width: 70%;
+    transition: all 1s;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+}
+
+.addTaskBtn, .searchBtn {
+    padding: 10px;
+    border: none;
+}
+
+
+
+.tasks-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: stretch;
+    background-color: midnightblue;
+    margin-top: 10px;
+}
+
+.tasks-container-item{
+    text-align: center;
+    background-color: crimson;
+}
+
+.task{
+    background-color: orange;
+    width: 70%;
+    word-wrap: break-word;
+}
+
+
+.edit, .remove{
+    background-color: mediumvioletred;
+    width: 100%;
+    word-wrap: break-word;
+    text-align: center;
+    height: 100%;
+}
+
+
+@media only screen and (max-width: 550px) {
+    .inputs-container-item{
+        width: 100%;
+    }
+    .task-input, .search-input{
+        max-width: 100%;
+    }
+    .task{
+        width: 100%;
+    }
+}
