@@ -126,7 +126,6 @@ i:hover {
 
 .edit-Task{
     background-color: tomato;
-    
     padding: 10px 20px;
 }
 
@@ -138,12 +137,50 @@ i:hover {
 
 
 .on-edit-input{
-    padding: 10px;
+    height: 100%;
+    width: 70%;
 }
 
 .saveBtn {
     background-color: gray;
+    flex-direction: row;
+    align-items: center;
 }
+
+.edited-task{
+    padding: 0;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .task-btns{
+        width: 100%;
+    }
+
+    .itemTask{
+        width: calc(100% - 20px);
+        overflow: visible;
+        word-wrap: break-word;
+        border-bottom: 2px solid gray;
+    }
+}
+
+
+@media only screen and (max-width: 550px) {
+    .inputs-container-item{
+        width: 100%;
+    }
+    .task-input, .search-input{
+        max-width: 100%;
+    }
+    /*
+    .task{
+        width: 100%;
+    }*/
+}
+
+
+
 
 /*
 
@@ -186,31 +223,3 @@ i:hover {
     margin: auto;
     text-align: center; 
 }*/
-
-
-@media only screen and (max-width: 600px) {
-    .task-btns{
-        width: 100%;
-    }
-
-    .itemTask{
-        width: calc(100% - 20px);
-        overflow: visible;
-        word-wrap: break-word;
-        border-bottom: 2px solid gray;
-    }
-}
-
-
-@media only screen and (max-width: 550px) {
-    .inputs-container-item{
-        width: 100%;
-    }
-    .task-input, .search-input{
-        max-width: 100%;
-    }
-    /*
-    .task{
-        width: 100%;
-    }*/
-}
