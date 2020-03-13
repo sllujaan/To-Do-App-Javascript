@@ -6,7 +6,7 @@
     <title>Todo App</title>
     <link rel="stylesheet" href="todo-app.css">
     <link rel="stylesheet" href="fontawesome-free-5.12.1-web/css/all.min.css">
-    <script type="text/javascript" src="todo-app.js"></script>
+    <script type="text/javascript" defer src="todo-app.js"></script>
 </head>
 <body>
     <div class="container">
@@ -26,25 +26,72 @@
             </div>
         </div>
 
+        <!--Tasks items conainer----------------------------------------------------------->
         <div class="tasks-container">
-            <div class="tasks-container-item itemTask">
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbbbbbbbbbbbbbbbbbbbcccccccccccccc
-            </div>
             
-            <div class="tasks-container-item task-btns">bbb
-                <div class="edit-Task">
-                    <i class="fas fa-edit"></i>
+            <!--Task item conainer----------------------------------------------------------->
+            <div class="task-container">
+                <div id="1" class="itemTask">
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbbbbbbbbbbbbbbbbbbbcccccccccccccc
                 </div>
-                <div class="remove-Task">
+                
+                <!--icons container----------------------------->
+                <div class="task-btns">
+                    <div class="edit-Task">
+                        <i id="1" class="fas fa-edit"></i>
+                    </div>
+                    <div class="remove-Task">
+                        <i id="1" class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
+                <!---------------------------------------------->
+            </div>
+            <!----------------------------------------------------------------------------------->
 
+
+            <!--Task item conainer----------------------------------------------------------->
+            <div class="task-container">
+                <div id="2" class="itemTask">
+                    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbbbbbbbbbbbbbbbbbbbcccccccccccccc
                 </div>
+                
+                <!--icons container----------------------------->
+                <div class="task-btns">
+                    <div class="edit-Task">
+                        <i id="2" class="fas fa-edit"></i>
+                    </div>
+                    <div class="remove-Task">
+                        <i id="2" class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
+                <!---------------------------------------------->
             </div>
-            
-            <!--
-            <div class="tasks-container-item itemRemove">
-                cc
-            </div>-->
+            <!----------------------------------------------------------------------------------->
+
+
+            <!--Task item conainer----------------------------------------------------------->
+            <div class="task-container">
+                <div id="3" class="itemTask">
+                    <input class="on-edit-input" type="text" value="aaaaaaaaaaaaaaaaaaa">
+                    <i id="3" class="fas fa-save fa-2x saveBtn"></i>
+                </div>
+                
+                <!--icons container----------------------------->
+                <div class="task-btns">
+                    <div class="edit-Task">
+                        <i id="3" class="fas fa-edit"></i>
+                    </div>
+                    <div class="remove-Task">
+                        <i id="3" class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
+                <!---------------------------------------------->
+            </div>
+            <!----------------------------------------------------------------------------------->
+
         </div>
+        <!--------------------------------------------------------------------------------------->
+
     </div>
 </body>
 </html>
