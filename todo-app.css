@@ -6,11 +6,16 @@
 
 .container{
     background-color: burlywood;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: stretch;
 }
 
 h1{
     text-align: center;
     background-color: cadetblue;
+    width: 100%;
 }
 
 .inputs-container{
@@ -19,6 +24,7 @@ h1{
     justify-content: center;
     flex-wrap: wrap;
     align-items: stretch;
+    width: 100%;
 }
 
 .inputs-container-item{
@@ -50,28 +56,76 @@ h1{
     flex-wrap: wrap;
     align-items: stretch;
     background-color: midnightblue;
-    margin-top: 10px;
+    margin: 10px;
+    width: 80%;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: stretch;
 }
 
+/*
 .tasks-container-item{
     text-align: center;
     background-color: crimson;
+    display: flex;
+    width: 80%;
 }
+*/
+
+.itemTask{
+    background-color: palegreen;
+    width: 70%;
+    text-align: center;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    padding: 10px;
+}
+
+.task-btns{
+    background-color: thistle;
+    width: 25%;
+}
+
+.itemEdit{
+    background-color: yellowgreen;
+    width: 10%;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+}
+
+.itemRemove{
+    background-color: royalblue;
+    width: 10%;
+    text-align: center;
+    margin: auto;
+    padding: 10px;
+}
+
+
+
+/*
 
 .task{
     background-color: orange;
-    width: 70%;
+    min-width: 70%;
     word-wrap: break-word;
-}
 
+}
 
 .edit, .remove{
     background-color: mediumvioletred;
-    width: 100%;
+    width: 10%;
     word-wrap: break-word;
     text-align: center;
-    height: 100%;
-}
+    display: table-cell;
+    vertical-align: middle;
+    margin: auto;
+    text-align: center; 
+}*/
+
 
 
 @media only screen and (max-width: 550px) {
@@ -81,7 +135,8 @@ h1{
     .task-input, .search-input{
         max-width: 100%;
     }
+    /*
     .task{
         width: 100%;
-    }
+    }*/
 }
