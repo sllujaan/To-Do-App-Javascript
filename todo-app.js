@@ -13,11 +13,24 @@ function addTask(id , value){
     if (!TASKS) {
         TASKS = []
     }
-    TASKS.push({id, value})
+    TASKS.unshift({id, value})
 }
 
 function getTasks(){
     return JSON.parse(localStorage.getItem(ITEMS_KEY))
+}
+
+function removeTask(id){
+    TASKS = getTasks()
+    if( (TASKS) && TASKS.length > 0) {
+        TASKS.find((task, index) => {
+            if(task.id == id) {
+                TASKS.splice(index, 1)
+                return task
+            }
+        })
+        save()
+    }
 }
 //-------------------------------------------------------------------------
 
@@ -36,6 +49,8 @@ loadTasks()
 document.addEventListener('click', (event)=> {
     var id = event.target.getAttribute("id")
 
+
+    //Edit task----------------------------------------------------------------------------
     if(event.target.classList.contains("fa-edit")) {
         console.log("edit..............")
         console.log("id = "+id)
@@ -63,9 +78,11 @@ document.addEventListener('click', (event)=> {
         event.target.style.setProperty("pointer-events", "none")
         //console.log(event.target.setAttribute("disabled", "ture"))
     }
+    //----------------------------------------------------------------------------------------
 
 
 
+    //Save edited taks-----------------------------------------------------------------------
     if(event.target.classList.contains("saveBtn")){
         var task_container = document.getElementById(id)
         console.log("on save333333333333")
@@ -90,8 +107,11 @@ document.addEventListener('click', (event)=> {
         var edit_task_btn = task_container.getElementsByClassName("fa-edit")[0]
         console.log(edit_task_btn)
         edit_task_btn.style.removeProperty("pointer-events")
-    }
 
+
+        
+    }
+    //------------------------------------------------------------------------------------------
     
 
 
@@ -99,6 +119,7 @@ document.addEventListener('click', (event)=> {
     if(event.target.classList.contains("fa-trash-alt")){
         var task_container = document.getElementById(id)
         console.log("delete me" , id)
+        removeTask(id)
         task_container.remove()
     }
 
@@ -115,6 +136,7 @@ document.addEventListener('click', (event)=> {
             addTask(id, input.value)
             save()
             tasks_container.insertBefore(generateTaskContainer(id, input.value), tasks_container.children[0])
+            input.value = ''
         }
     }
     //---------------------------------------------------------------------------------
@@ -125,7 +147,19 @@ document.addEventListener('click', (event)=> {
         var input = document.getElementsByClassName("search-input")[0]
         
         if(input.value.length > 0){
-            console.log("search")
+            TASKS = getTasks()
+            if( (TASKS) && TASKS.length > 0) {
+                tasks_container.innerHTML = null
+                TASKS.forEach(task => {
+                    if(task.value.includes(input.value)){
+                        tasks_container.append(generateTaskContainer(task.id, task.value))
+                    }
+                })
+
+                if(tasks_container.innerHTML.trim() == "") {
+                    tasks_container.innerHTML = `<h1>No Tasks Found.</h1>`
+                }
+            }
         }
     }
     //------------------------------------------------------------------------------------------
