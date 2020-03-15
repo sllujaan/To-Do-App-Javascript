@@ -1,5 +1,38 @@
 
 
+var tasks_container = document.getElementsByClassName("tasks-container")[0]
+var ITEMS_KEY = "TO-DO-APP-0.4226353638288256"
+var TASKS = []
+
+//Local storage functions----------------------------------------------------------
+function save(){
+    localStorage.setItem(ITEMS_KEY, JSON.stringify(TASKS))
+}
+
+function addTask(id , value){
+    if (!TASKS) {
+        TASKS = []
+    }
+    TASKS.push({id, value})
+}
+
+function getTasks(){
+    return JSON.parse(localStorage.getItem(ITEMS_KEY))
+}
+//-------------------------------------------------------------------------
+
+//Load Tasks on document load----------------------------------------------------------
+function loadTasks(){
+    TASKS = getTasks()
+    if( (TASKS) && TASKS.length > 0) {
+        TASKS.forEach(task => {
+            tasks_container.append(generateTaskContainer(task.id, task.value))
+        })
+    }
+}
+loadTasks()
+//-------------------------------------------------------------------------------------
+
 document.addEventListener('click', (event)=> {
     var id = event.target.getAttribute("id")
 
@@ -59,9 +92,69 @@ document.addEventListener('click', (event)=> {
         edit_task_btn.style.removeProperty("pointer-events")
     }
 
+    
+
+
+    //Remove Task-------------------------------------------------------------
+    if(event.target.classList.contains("fa-trash-alt")){
+        var task_container = document.getElementById(id)
+        console.log("delete me" , id)
+        task_container.remove()
+    }
+
+    //-----------------------------------------------------------------------------
+
+
+    //Add Task--------------------------------------------------------------------------
+    if(event.target.classList.contains("addTaskBtn") || (event.target.parentElement && event.target.parentElement.classList.contains("addTaskBtn"))) {
+        event.preventDefault()
+        var input = document.getElementsByClassName("task-input")[0]
+        var id = Math.random()
+        
+        if(input.value.length > 0){
+            addTask(id, input.value)
+            save()
+            tasks_container.insertBefore(generateTaskContainer(id, input.value), tasks_container.children[0])
+        }
+    }
+    //---------------------------------------------------------------------------------
+    
+    //Search Task--------------------------------------------------------------------------------
+    if(event.target.classList.contains("searchBtn") || (event.target.parentElement && event.target.parentElement.classList.contains("searchBtn"))) {
+        event.preventDefault()
+        var input = document.getElementsByClassName("search-input")[0]
+        
+        if(input.value.length > 0){
+            console.log("search")
+        }
+    }
+    //------------------------------------------------------------------------------------------
+
 })
 
+function generateTaskContainer(id, value) {
+    
+    var task_container = document.createElement("div")
+    task_container.setAttribute("id", id)
+    task_container.classList.add("task-container")
+    
+    var content = `
+                <div id="${id}" class="itemTask">
+                    ${value}
+                </div>
 
+                <div class="task-btns">
+                    <div class="edit-Task">
+                        <i id="${id}" class="fas fa-edit"></i>
+                    </div>
+                    <div class="remove-Task">
+                        <i id="${id}" class="fas fa-trash-alt"></i>
+                    </div>
+                </div>
+                `
+    task_container.innerHTML = content
+    return task_container
+}
 
 
 
