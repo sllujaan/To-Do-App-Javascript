@@ -42,8 +42,13 @@ function loadTasks(){
             tasks_container.append(generateTaskContainer(task.id, task.value))
         })
     }
+    else{
+        tasks_container.innerHTML = null
+        tasks_container.innerHTML = `<h1 id="00000">No Tasks Found.</h1>`
+    }
 }
-loadTasks()
+
+document.addEventListener('DOMContentLoaded', loadTasks)
 //-------------------------------------------------------------------------------------
 
 document.addEventListener('click', (event)=> {
@@ -133,6 +138,10 @@ document.addEventListener('click', (event)=> {
         var id = Math.random()
         
         if(input.value.length > 0){
+            console.log(tasks_container.lastElementChild)
+            if(tasks_container.lastElementChild.id == '00000'){
+                tasks_container.innerHTML = null
+            }
             addTask(id, input.value)
             save()
             tasks_container.insertBefore(generateTaskContainer(id, input.value), tasks_container.children[0])
@@ -157,7 +166,7 @@ document.addEventListener('click', (event)=> {
                 })
 
                 if(tasks_container.innerHTML.trim() == "") {
-                    tasks_container.innerHTML = `<h1>No Tasks Found.</h1>`
+                    tasks_container.innerHTML = `<h1 id="00000">No Tasks Found.</h1>`
                 }
             }
         }
