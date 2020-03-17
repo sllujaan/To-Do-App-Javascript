@@ -81,17 +81,15 @@ h1{
     flex-wrap: wrap;
     align-items: stretch;
     
+    
     transition: all 1s;
+    /*transform: rotateX(90deg);*/
 }
 
-
-
-.task-container-active{
-    width: 80%;
+.task-container-active {
     height: auto;
-    opacity: 1;
-    visibility: visible;
 }
+
 
 .task-container:hover{
     transform: scale(1.1);

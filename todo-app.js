@@ -138,14 +138,37 @@ document.addEventListener('click', (event)=> {
         var id = Math.random()
         
         if(input.value.length > 0){
+            var generatedTaskContainer = generateTaskContainer(id, input.value)
             console.log(tasks_container.lastElementChild)
             if(tasks_container.lastElementChild.id == '00000'){
                 tasks_container.innerHTML = null
             }
             addTask(id, input.value)
             save()
-            tasks_container.insertBefore(generateTaskContainer(id, input.value), tasks_container.children[0])
+            
+            var element = document.createElement('div')
+            element.classList.add("task-container")
+            element.style.setProperty("margin", 0)
+            element.style.setProperty("height", 0)
+            //element.style.setProperty("opacity", 0)
+            //element.style.setProperty("visibility", "hidden")
+            element.setAttribute("id", "temp")
+            console.log(element)
+
+            //tasks_container.insertBefore(generateTaskContainer(id, input.value), tasks_container.children[0])
+            tasks_container.insertBefore(element, tasks_container.children[0])
+            void tasks_container.children[0].offsetWidth;
+            tasks_container.children[0].style.setProperty("margin", "10px")
+            tasks_container.children[0].style.setProperty("height", "38px")
+            
+            
+            
+            setTimeout(() => {
+                tasks_container.children[0].replaceWith(generatedTaskContainer)
+            }, 1000);
+            
             input.value = ''
+            tasks_container.children[0].classList.add("task-container-active")
         }
     }
     //---------------------------------------------------------------------------------
