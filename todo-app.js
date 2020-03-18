@@ -3,6 +3,8 @@
 var tasks_container = document.getElementsByClassName("tasks-container")[0]
 var ITEMS_KEY = "TO-DO-APP-0.4226353638288256"
 var TASKS = []
+var oldText
+
 
 //Local storage functions----------------------------------------------------------
 function save(){
@@ -32,6 +34,26 @@ function removeTask(id){
         save()
     }
 }
+
+
+//Save new Text in localstorage------------------------------------------
+function replaceTextLocalStorage(id, newText) {
+    console.log(id, newText)
+    TASKS = getTasks()
+    if( (TASKS) && TASKS.length > 0) {
+        TASKS.find((task) => {
+            if(task.id == id) {
+                //TASKS.splice(index, 1)
+                console.log("task found.......<<<<<<<<<<<<<")
+                task.value = newText
+                return task
+            }
+        })
+        save()
+    }
+}
+//------------------------------------------------------------
+
 //-------------------------------------------------------------------------
 
 //Load Tasks on document load----------------------------------------------------------
@@ -53,16 +75,16 @@ document.addEventListener('DOMContentLoaded', loadTasks)
 
 document.addEventListener('click', (event)=> {
     var id = event.target.getAttribute("id")
-
+    console.log(oldText)
 
     //Edit task----------------------------------------------------------------------------
     if(event.target.classList.contains("fa-edit")) {
         console.log("edit..............")
         console.log("id = "+id)
         var taskItem = document.getElementById(id).getElementsByClassName("itemTask")[0]
-        var text = taskItem.innerText
+        oldText = taskItem.innerText
         console.log(taskItem)
-        console.log(text)
+        console.log(oldText)
 
 
 
@@ -70,8 +92,11 @@ document.addEventListener('click', (event)=> {
         var div_edited_task = document.createElement("div")
         div_edited_task.classList.add("edited-task")
 
-        var content = `<input id="3" class="on-edit-input" type="text" value="${text}">
-                        <i id="${id}" class="fas fa-save fa-2x saveBtn"></i>
+        var content = `<input id="${id}" class="on-edit-input" type="text" value="${oldText}">
+                            <div class="editCancelBtns">
+                                <i id="${id}" class="fas fa-save fa-2x saveBtn"></i>
+                                <i id="${id}" class="fas fa-ban fa-2x cancelBtn"></i>
+                            </div>
                         `
         
         div_edited_task.innerHTML = content
@@ -87,15 +112,15 @@ document.addEventListener('click', (event)=> {
 
 
 
-    //Save edited taks-----------------------------------------------------------------------
+    //Save button task-----------------------------------------------------------------------
     if(event.target.classList.contains("saveBtn")){
         var task_container = document.getElementById(id)
         console.log("on save333333333333")
-        var prevElement = event.target.previousElementSibling
-        var newText = prevElement.value
+        //var prevElement = event.target.previousElementSibling
+        var inputElement = event.target.parentElement.parentElement.children[0]
+        var newText = inputElement.value
 
-
-        console.log(prevElement.value)
+        console.log(newText)
 
 
         var div = document.createElement("div")
@@ -105,7 +130,7 @@ document.addEventListener('click', (event)=> {
 
         console.log(div)
 
-        var edited_task = event.target.parentElement
+        var edited_task = event.target.parentElement.parentElement
         edited_task.replaceWith(div)
 
         console.log(task_container)
@@ -113,11 +138,42 @@ document.addEventListener('click', (event)=> {
         console.log(edit_task_btn)
         edit_task_btn.style.removeProperty("pointer-events")
 
-
+        replaceTextLocalStorage(id, newText)
         
     }
-    //------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     
+
+    //Cancel task-----------------------------------------------------------------------
+    if(event.target.classList.contains("cancelBtn")){
+        var task_container = document.getElementById(id)
+        console.log("cancelling tasks........")
+        console.log(oldText)
+        //console.log("on save333333333333")
+        //var prevElement = event.target.previousElementSibling
+        //var inputElement = event.target.parentElement.parentElement.children[0]
+        //var newText = inputElement.value
+
+        //console.log(newText)
+
+
+        var div = document.createElement("div")
+        div.setAttribute("id", id)
+        div.classList.add("itemTask")
+        div.innerText = oldText
+
+        console.log(div)
+
+        var edited_task = event.target.parentElement.parentElement
+        edited_task.replaceWith(div)
+
+        console.log(task_container)
+        var edit_task_btn = task_container.getElementsByClassName("fa-edit")[0]
+        console.log(edit_task_btn)
+        edit_task_btn.style.removeProperty("pointer-events")
+        
+    }
+    //---------------------------------------------------------------------------------------
 
 
     //Remove Task-------------------------------------------------------------
@@ -126,6 +182,12 @@ document.addEventListener('click', (event)=> {
         console.log("delete me" , id)
         removeTask(id)
         task_container.remove()
+
+        TASKS = getTasks()
+        if( (TASKS) && TASKS.length == 0) {
+            showNoTasksfound()
+        }
+        
     }
 
     //-----------------------------------------------------------------------------
@@ -145,28 +207,7 @@ document.addEventListener('click', (event)=> {
             }
             addTask(id, input.value)
             save()
-            
-            var element = document.createElement('div')
-            element.classList.add("task-container")
-            element.style.setProperty("margin", 0)
-            element.style.setProperty("height", 0)
-            //element.style.setProperty("opacity", 0)
-            //element.style.setProperty("visibility", "hidden")
-            element.setAttribute("id", "temp")
-            console.log(element)
-
-            //tasks_container.insertBefore(generateTaskContainer(id, input.value), tasks_container.children[0])
-            tasks_container.insertBefore(element, tasks_container.children[0])
-            void tasks_container.children[0].offsetWidth;
-            tasks_container.children[0].style.setProperty("margin", "10px")
-            tasks_container.children[0].style.setProperty("height", "38px")
-            
-            
-            
-            setTimeout(() => {
-                tasks_container.children[0].replaceWith(generatedTaskContainer)
-            }, 1000);
-            
+            tasks_container.insertBefore(generateTaskContainer(id, input.value), tasks_container.children[0])
             input.value = ''
             tasks_container.children[0].classList.add("task-container-active")
         }
@@ -221,6 +262,30 @@ function generateTaskContainer(id, value) {
     task_container.innerHTML = content
     return task_container
 }
+
+
+//on edit event listener----------------------------------------------
+document.addEventListener('keyup', (event) => {
+    if(event.target.classList.contains("on-edit-input")){
+        console.log(event.target.nextElementSibling)
+        if(event.key == "Enter") {
+            console.log("Enter....")
+            event.target.nextElementSibling.children[0].click()
+        }
+        console.log(event)
+        console.log(event.target.value)
+    }
+})
+//----------------------------------------------------------------------
+
+//--------------------
+function showNoTasksfound() {
+    tasks_container.innerHTML = null
+    tasks_container.innerHTML = `<h1 id="00000">No Tasks Found.</h1>`
+}
+
+//------------------
+
 
 
 
