@@ -272,7 +272,8 @@ document.addEventListener('click', (event)=> {
     function genRegEx(words) {
         if(words) {
             var regEx = '('
-            wordsArr = words.match(/[^\s]{1,}/g)
+            wordsArr = words.match(/[^\s\\]{1,}/g)
+            console.log(wordsArr)
             if (wordsArr) {
                     wordsArr.forEach((word, index) => {
                     regEx += word + '|'
