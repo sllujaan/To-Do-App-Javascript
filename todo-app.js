@@ -218,7 +218,38 @@ document.addEventListener('click', (event)=> {
     if(event.target.classList.contains("searchBtn") || (event.target.parentElement && event.target.parentElement.classList.contains("searchBtn"))) {
         event.preventDefault()
         var input = document.getElementsByClassName("search-input")[0]
+
+        var regEx = genRegEx(input.value)
+        console.log(regEx)
         
+        if(regEx) {
+            TASKS = getTasks()
+            if( (TASKS) && TASKS.length > 0) {
+                tasks_container.innerHTML = null
+                TASKS.forEach(task => {
+                    if(regEx.test(task.value)){
+                        var taskContainer = generateTaskContainer(task.id, task.value)
+                        var itemTask = taskContainer.querySelector(".itemTask")
+                        
+                        itemTask.innerHTML = itemTask.innerText.replace(regEx, `<span class="highlighted">$1</span>`)
+
+                        //console.log(taskText.replace(regEx, `<span class="highlighted">$1</span>`))
+
+                        tasks_container.append(taskContainer)
+                    }
+                })
+
+                if(tasks_container.innerHTML.trim() == "") {
+                    tasks_container.innerHTML = `<h1 id="00000">No Tasks Found.</h1>`
+                }
+            }
+        }
+        else{
+            console.log("false RegEx..")
+            tasks_container.innerHTML = `<h1 id="00000">No Tasks Found.</h1>`
+        }
+
+        /*
         if(input.value.length > 0){
             TASKS = getTasks()
             if( (TASKS) && TASKS.length > 0) {
@@ -233,9 +264,28 @@ document.addEventListener('click', (event)=> {
                     tasks_container.innerHTML = `<h1 id="00000">No Tasks Found.</h1>`
                 }
             }
-        }
+        }*/
     }
     //------------------------------------------------------------------------------------------
+
+    //Generate Regular Expression----------------------------------------------------
+    function genRegEx(words) {
+        if(words) {
+            var regEx = '('
+            wordsArr = words.match(/[^\s]{1,}/g)
+            if (wordsArr) {
+                    wordsArr.forEach((word, index) => {
+                    regEx += word + '|'
+                })
+                regEx.replace(/.$/, "\.")
+                regEx = regEx.slice(0, regEx.length-1)
+                regEx += ')'
+                var newRegEx = new RegExp(regEx, 'gi')
+                return newRegEx
+            }
+        }
+    }
+    //------------------------------------------------------------------------------
 
 })
 
@@ -304,5 +354,33 @@ for(i=0; i<remove.length; i++){
 function onRemove(event){
     console.log(event.target)
 }
+
+
+
+//Search Task--------------------------------------------------------------------------------
+    if(event.target.classList.contains("searchBtn") || (event.target.parentElement && event.target.parentElement.classList.contains("searchBtn"))) {
+        event.preventDefault()
+        var input = document.getElementsByClassName("search-input")[0]
+
+        var regEx = genRegEx(input.value)
+        console.log(regEx)
+        
+        if(input.value.length > 0){
+            TASKS = getTasks()
+            if( (TASKS) && TASKS.length > 0) {
+                tasks_container.innerHTML = null
+                TASKS.forEach(task => {
+                    if(task.value.includes(input.value)){
+                        tasks_container.append(generateTaskContainer(task.id, task.value))
+                    }
+                })
+
+                if(tasks_container.innerHTML.trim() == "") {
+                    tasks_container.innerHTML = `<h1 id="00000">No Tasks Found.</h1>`
+                }
+            }
+        }
+    }
+    //------------------------------------------------------------------------------------------
 
 */

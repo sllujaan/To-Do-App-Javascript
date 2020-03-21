@@ -189,6 +189,8 @@ i:hover {
     width: 70%;
     border: none;
     padding: 10px;
+
+    border-radius: var(--border-radius);
 }
 
 .saveBtn, .cancelBtn {
@@ -213,6 +215,12 @@ i:hover {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+
+    border-radius: var(--border-radius);
+}
+
+.highlighted{
+    background-color: yellow;
 }
 
 
