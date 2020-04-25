@@ -3,8 +3,8 @@
 var tasks_container = document.getElementsByClassName("tasks-container")[0]
 var ITEMS_KEY = "TO-DO-APP-0.4226353638288256"
 var TASKS = []
-var oldText
-
+//var oldText
+var oldTextArr = []
 
 //Local storage functions----------------------------------------------------------
 function save(){
@@ -75,16 +75,18 @@ document.addEventListener('DOMContentLoaded', loadTasks)
 
 document.addEventListener('click', (event)=> {
     var id = event.target.getAttribute("id")
-    console.log(oldText)
+    //console.log(oldText)
 
     //Edit task----------------------------------------------------------------------------
     if(event.target.classList.contains("fa-edit")) {
         console.log("edit..............")
         console.log("id = "+id)
         var taskItem = document.getElementById(id).getElementsByClassName("itemTask")[0]
-        oldText = taskItem.innerText
+        var oldText = taskItem.innerText
         console.log(taskItem)
-        console.log(oldText)
+        //console.log(oldText)
+
+        oldTextArr.push({id:id, text:oldText})
 
 
 
@@ -161,7 +163,7 @@ document.addEventListener('click', (event)=> {
     if(event.target.classList.contains("cancelBtn")){
         var task_container = document.getElementById(id)
         console.log("cancelling tasks........")
-        console.log(oldText)
+        //console.log(oldText)
         //console.log("on save333333333333")
         //var prevElement = event.target.previousElementSibling
         //var inputElement = event.target.parentElement.parentElement.children[0]
@@ -169,11 +171,13 @@ document.addEventListener('click', (event)=> {
 
         //console.log(newText)
 
+        var oldTextObj = getOldTextById(id)        
+
 
         var div = document.createElement("div")
         div.setAttribute("id", id)
         div.classList.add("itemTask")
-        div.innerText = oldText
+        div.innerText = (oldTextObj) ? (oldTextObj.text) : ("")
 
         console.log(div)
 
@@ -224,6 +228,9 @@ document.addEventListener('click', (event)=> {
             input.value = ''
             tasks_container.children[0].classList.add("task-container-active")
         }
+        else{
+            alert("The field is empty.")
+        }
     }
     //---------------------------------------------------------------------------------
     
@@ -231,6 +238,8 @@ document.addEventListener('click', (event)=> {
     if(event.target.classList.contains("searchBtn") || (event.target.parentElement && event.target.parentElement.classList.contains("searchBtn"))) {
         event.preventDefault()
         var input = document.getElementsByClassName("search-input")[0]
+
+        if(input.value.length === 0) {alert("The field is empty.");return}
 
         var regEx = genRegEx(input.value)
         console.log(regEx)
@@ -349,48 +358,10 @@ function showNoTasksfound() {
 }
 
 //------------------
-/*
-
-var remove = document.getElementsByClassName("fa-trash-alt")
-console.log(remove)
-console.log(remove.length)
 
 
-for(i=0; i<remove.length; i++){
-    console.log(remove[i])
-    remove[i].addEventListener('click', onRemove)
+//get old text by id --------------------------------
+function getOldTextById(id) {
+    return oldTextArr.find(obj => parseFloat(obj.id) === parseFloat(id))
 }
-
-function onRemove(event){
-    console.log(event.target)
-}
-
-
-
-//Search Task--------------------------------------------------------------------------------
-    if(event.target.classList.contains("searchBtn") || (event.target.parentElement && event.target.parentElement.classList.contains("searchBtn"))) {
-        event.preventDefault()
-        var input = document.getElementsByClassName("search-input")[0]
-
-        var regEx = genRegEx(input.value)
-        console.log(regEx)
-        
-        if(input.value.length > 0){
-            TASKS = getTasks()
-            if( (TASKS) && TASKS.length > 0) {
-                tasks_container.innerHTML = null
-                TASKS.forEach(task => {
-                    if(task.value.includes(input.value)){
-                        tasks_container.append(generateTaskContainer(task.id, task.value))
-                    }
-                })
-
-                if(tasks_container.innerHTML.trim() == "") {
-                    tasks_container.innerHTML = `<h1 id="00000">No Tasks Found.</h1>`
-                }
-            }
-        }
-    }
-    //------------------------------------------------------------------------------------------
-
-*/
+//------------------------------------

@@ -178,12 +178,12 @@ i{
 */
 
 .fa-edit:hover {
-    color: rgb(50, 70, 168);
+    color: #0336FF;
     transform: scale(1.3);
 }
 
 .fa-trash-alt:hover {
-    color: red;
+    color: #FF0266;
     transform: scale(1.3);
 }
 
@@ -219,12 +219,12 @@ i:hover {
 
 .saveBtn:hover{
     transform: scale(1.1);
-    color: rgb(50, 70, 168);
+    color: #0336FF;
 }
 
 .cancelBtn:hover{
     transform: scale(1.1);
-    color: red;
+    color: #FF0266;
 }
 
 .edited-task{
