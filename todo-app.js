@@ -5,6 +5,7 @@ var ITEMS_KEY = "TO-DO-APP-0.4226353638288256"
 var TASKS = []
 //var oldText
 var oldTextArr = []
+var container_tooltip = document.getElementsByClassName("container-tooltip")[0]
 
 //Local storage functions----------------------------------------------------------
 function save(){
@@ -365,3 +366,34 @@ function getOldTextById(id) {
     return oldTextArr.find(obj => parseFloat(obj.id) === parseFloat(id))
 }
 //------------------------------------
+
+
+document.addEventListener('mousemove', e => {
+    console.log(e.target)
+    console.log(e.clientX, e.clientY)
+
+    if(window.innerWidth <= 600) return
+    
+    if(e.target.classList.contains("itemTask")) {
+        showToolTip(e.target.innerText, e.clientX, e.clientY)
+    }
+    else{
+        console.log("hide tool")
+        container_tooltip.style.setProperty("display", `none`)
+    }
+
+
+})
+
+
+
+function showToolTip(text, x, y) {
+    if(!text || !x || !y) return
+
+    container_tooltip.innerText = text
+    container_tooltip.style.setProperty("display", `block`)
+    container_tooltip.style.setProperty("left", `${x}px`)
+    container_tooltip.style.setProperty("top", `${y}px`)
+    
+
+}

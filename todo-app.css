@@ -8,6 +8,7 @@
 body{
     background-color:#FF0266;
     user-select: none;
+    position: relative;
 }
 
 .container{
@@ -29,6 +30,7 @@ h1{
 
     padding: 20px 0;
     color: white;
+    width: 100%;
 }
 
 .inputs-container{
@@ -110,11 +112,12 @@ h1{
     align-items: stretch;
     
     
-    transition: all 1s;
+    transition: all .1s;
     -webkit-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
     -moz-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
     box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
     border-radius: var(--border-radius);
+
 }
 
 .task-container-active {
@@ -123,7 +126,7 @@ h1{
 
 
 .task-container:hover{
-    transform: scale(1.1);
+    transform: scale(1.02);
     cursor: pointer;
 }
 
@@ -160,7 +163,7 @@ h1{
     border-bottom-left-radius: var(--border-radius);
     border-bottom-right-radius: var(--border-radius);
 
-    border-top: 1px solid #0336FF;
+    
 
 }
 
@@ -247,6 +250,7 @@ i:hover {
 @media only screen and (max-width: 600px) {
     .task-btns{
         width: 100%;
+        border-top: 1px solid #0336FF;
     }
 
     .itemTask{
@@ -263,9 +267,7 @@ i:hover {
         width: 100%;
     }
 
-    h1 {
-        width: 100%;
-    }
+    
 
     
 }
@@ -283,6 +285,50 @@ i:hover {
         width: 100%;
     }*/
 }
+
+
+
+.container-tooltip {
+    background-color: #0336FF;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+
+    -webkit-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+    -moz-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+    box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+
+    padding: 0 10px;
+
+    border-radius: var(--border-radius);
+    display: none;
+    max-width: 300px;
+    word-wrap: break-word;
+    color: white;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
