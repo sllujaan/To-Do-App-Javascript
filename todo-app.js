@@ -127,23 +127,31 @@ document.addEventListener('click', (event)=> {
 
         console.log(newText)
 
+        //check if length is not zero save text----------------------
+        if(newText && newText.length > 0) {
+            var div = document.createElement("div")
+            div.setAttribute("id", id)
+            div.classList.add("itemTask")
+            div.innerText = newText
 
-        var div = document.createElement("div")
-        div.setAttribute("id", id)
-        div.classList.add("itemTask")
-        div.innerText = newText
+            console.log(div)
 
-        console.log(div)
+            var edited_task = event.target.parentElement.parentElement
+            edited_task.replaceWith(div)
 
-        var edited_task = event.target.parentElement.parentElement
-        edited_task.replaceWith(div)
+            console.log(task_container)
+            var edit_task_btn = task_container.getElementsByClassName("fa-edit")[0]
+            console.log(edit_task_btn)
+            edit_task_btn.style.removeProperty("pointer-events")
 
-        console.log(task_container)
-        var edit_task_btn = task_container.getElementsByClassName("fa-edit")[0]
-        console.log(edit_task_btn)
-        edit_task_btn.style.removeProperty("pointer-events")
+            replaceTextLocalStorage(id, newText)
+        }
+        else{
+            alert("The field is empty.")
+        }
 
-        replaceTextLocalStorage(id, newText)
+
+        
         
     }
     //---------------------------------------------------------------------------------------
