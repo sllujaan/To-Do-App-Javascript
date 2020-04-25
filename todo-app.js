@@ -106,7 +106,12 @@ document.addEventListener('click', (event)=> {
         taskItem.replaceWith(div_edited_task)
 
         event.target.style.setProperty("pointer-events", "none")
-        //console.log(event.target.setAttribute("disabled", "ture"))
+
+        //focus input when user edits a taks------------------------
+        var on_edit_container = document.getElementById(id)
+        var on_edit_input = on_edit_container.getElementsByClassName("on-edit-input")[0]
+        on_edit_input.focus()
+        //------------------------------------------------------
     }
     //----------------------------------------------------------------------------------------
 
