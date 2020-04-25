@@ -75,6 +75,11 @@ h1{
     -webkit-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
     -moz-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
     box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+
+    background-color: #0336FF;
+    color: white;
+
+    outline-style: unset;
 }
 
 
@@ -139,6 +144,8 @@ h1{
     padding: 10px;
 
     border-radius: var(--border-radius);
+
+    
 }
 
 .task-btns{
@@ -149,7 +156,12 @@ h1{
     flex-wrap: wrap;
     align-items: stretch;
 
-    border-radius: var(--border-radius);
+    
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+
+    border-top: 1px solid #0336FF;
+
 }
 
 i{
@@ -224,6 +236,7 @@ i:hover {
     flex-wrap: wrap;
 
     border-radius: var(--border-radius);
+
 }
 
 .highlighted{
@@ -240,12 +253,10 @@ i:hover {
         width: calc(100% - 20px);
         overflow: visible;
         word-wrap: break-word;
-        border-bottom: 2px solid gray;
     }
 
     .edited-task{
         width: 100%;
-        border-bottom: 2px solid gray;
     }
 
     .on-edit-input{
