@@ -336,10 +336,6 @@ function showNoTasksfound() {
 }
 
 //------------------
-
-
-
-
 /*
 
 var remove = document.getElementsByClassName("fa-trash-alt")
