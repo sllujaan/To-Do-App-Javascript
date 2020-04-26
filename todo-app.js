@@ -95,7 +95,7 @@ document.addEventListener('click', (event)=> {
         var div_edited_task = document.createElement("div")
         div_edited_task.classList.add("edited-task")
 
-        var content = `<input id="${id}" class="on-edit-input" type="text" value="${oldText}">
+        var content = `<input id="${id}" class="on-edit-input" type="text" value="${oldText}" onfocus="this.value = this.value;">
                             <div class="editCancelBtns">
                                 <i id="${id}" class="fas fa-save fa-2x saveBtn"></i>
                                 <i id="${id}" class="fas fa-ban fa-2x cancelBtn"></i>
@@ -113,7 +113,10 @@ document.addEventListener('click', (event)=> {
         //focus input when user edits a taks------------------------
         var on_edit_container = document.getElementById(id)
         var on_edit_input = on_edit_container.getElementsByClassName("on-edit-input")[0]
+        var val = on_edit_input.value
+        on_edit_input.value = ''
         on_edit_input.focus()
+        on_edit_input.value = val
         //------------------------------------------------------
     }
     //----------------------------------------------------------------------------------------
