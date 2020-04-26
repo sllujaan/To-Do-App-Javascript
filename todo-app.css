@@ -289,7 +289,7 @@ i:hover {
 
 
 .container-tooltip {
-    background-color: #0336FF;
+    background-color: rgba(3, 53, 255, 0.74);
     position: absolute;
     top: 10px;
     left: 10px;

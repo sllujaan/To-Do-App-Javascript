@@ -39,13 +39,13 @@ function removeTask(id){
 
 //Save new Text in localstorage------------------------------------------
 function replaceTextLocalStorage(id, newText) {
-    console.log(id, newText)
+    
     TASKS = getTasks()
     if( (TASKS) && TASKS.length > 0) {
         TASKS.find((task) => {
             if(task.id == id) {
                 //TASKS.splice(index, 1)
-                console.log("task found.......<<<<<<<<<<<<<")
+                
                 task.value = newText
                 return task
             }
@@ -76,16 +76,16 @@ document.addEventListener('DOMContentLoaded', loadTasks)
 
 document.addEventListener('click', (event)=> {
     var id = event.target.getAttribute("id")
-    //console.log(oldText)
+    
 
     //Edit task----------------------------------------------------------------------------
     if(event.target.classList.contains("fa-edit")) {
-        console.log("edit..............")
-        console.log("id = "+id)
+        
+        
         var taskItem = document.getElementById(id).getElementsByClassName("itemTask")[0]
         var oldText = taskItem.innerText
-        console.log(taskItem)
-        //console.log(oldText)
+        
+        
 
         oldTextArr.push({id:id, text:oldText})
 
@@ -104,7 +104,7 @@ document.addEventListener('click', (event)=> {
         
         div_edited_task.innerHTML = content
 
-        console.log(div_edited_task)
+        
 
         taskItem.replaceWith(div_edited_task)
 
@@ -123,12 +123,12 @@ document.addEventListener('click', (event)=> {
     //Save button task-----------------------------------------------------------------------
     if(event.target.classList.contains("saveBtn")){
         var task_container = document.getElementById(id)
-        console.log("on save333333333333")
+        
         //var prevElement = event.target.previousElementSibling
         var inputElement = event.target.parentElement.parentElement.children[0]
         var newText = inputElement.value
 
-        console.log(newText)
+        
 
         //check if length is not zero save text----------------------
         if(newText && newText.length > 0) {
@@ -137,14 +137,14 @@ document.addEventListener('click', (event)=> {
             div.classList.add("itemTask")
             div.innerText = newText
 
-            console.log(div)
+            
 
             var edited_task = event.target.parentElement.parentElement
             edited_task.replaceWith(div)
 
-            console.log(task_container)
+            
             var edit_task_btn = task_container.getElementsByClassName("fa-edit")[0]
-            console.log(edit_task_btn)
+            
             edit_task_btn.style.removeProperty("pointer-events")
 
             replaceTextLocalStorage(id, newText)
@@ -163,14 +163,14 @@ document.addEventListener('click', (event)=> {
     //Cancel task-----------------------------------------------------------------------
     if(event.target.classList.contains("cancelBtn")){
         var task_container = document.getElementById(id)
-        console.log("cancelling tasks........")
-        //console.log(oldText)
-        //console.log("on save333333333333")
+        
+        
+        
         //var prevElement = event.target.previousElementSibling
         //var inputElement = event.target.parentElement.parentElement.children[0]
         //var newText = inputElement.value
 
-        //console.log(newText)
+        
 
         var oldTextObj = getOldTextById(id)        
 
@@ -180,14 +180,14 @@ document.addEventListener('click', (event)=> {
         div.classList.add("itemTask")
         div.innerText = (oldTextObj) ? (oldTextObj.text) : ("")
 
-        console.log(div)
+        
 
         var edited_task = event.target.parentElement.parentElement
         edited_task.replaceWith(div)
 
-        console.log(task_container)
+        
         var edit_task_btn = task_container.getElementsByClassName("fa-edit")[0]
-        console.log(edit_task_btn)
+        
         edit_task_btn.style.removeProperty("pointer-events")
         
     }
@@ -197,7 +197,7 @@ document.addEventListener('click', (event)=> {
     //Remove Task-------------------------------------------------------------
     if(event.target.classList.contains("fa-trash-alt")){
         var task_container = document.getElementById(id)
-        console.log("delete me" , id)
+        
         removeTask(id)
         task_container.remove()
 
@@ -219,7 +219,7 @@ document.addEventListener('click', (event)=> {
         
         if(input.value.length > 0){
             var generatedTaskContainer = generateTaskContainer(id, input.value)
-            console.log(tasks_container.lastElementChild)
+            
             if(tasks_container.lastElementChild.id == '00000'){
                 tasks_container.innerHTML = null
             }
@@ -243,7 +243,7 @@ document.addEventListener('click', (event)=> {
         if(input.value.length === 0) {alert("The field is empty.");return}
 
         var regEx = genRegEx(input.value)
-        console.log(regEx)
+        
         
         if(regEx) {
             TASKS = getTasks()
@@ -256,7 +256,7 @@ document.addEventListener('click', (event)=> {
                         
                         itemTask.innerHTML = itemTask.innerText.replace(regEx, `<span class="highlighted">$1</span>`)
 
-                        //console.log(taskText.replace(regEx, `<span class="highlighted">$1</span>`))
+                        
 
                         tasks_container.append(taskContainer)
                     }
@@ -268,7 +268,7 @@ document.addEventListener('click', (event)=> {
             }
         }
         else{
-            console.log("false RegEx..")
+            
             tasks_container.innerHTML = `<h1 id="00000">No Tasks Found.</h1>`
         }
 
@@ -296,7 +296,7 @@ document.addEventListener('click', (event)=> {
         if(words) {
             var regEx = '('
             wordsArr = words.match(/[^\s\\]{1,}/g)
-            console.log(wordsArr)
+            
             if (wordsArr) {
                     wordsArr.forEach((word, index) => {
                     regEx += word + '|'
@@ -341,13 +341,13 @@ function generateTaskContainer(id, value) {
 //on edit event listener----------------------------------------------
 document.addEventListener('keyup', (event) => {
     if(event.target.classList.contains("on-edit-input")){
-        console.log(event.target.nextElementSibling)
+        
         if(event.key == "Enter") {
-            console.log("Enter....")
+            
             event.target.nextElementSibling.children[0].click()
         }
-        console.log(event)
-        console.log(event.target.value)
+        
+        
     }
 })
 //----------------------------------------------------------------------
@@ -369,8 +369,8 @@ function getOldTextById(id) {
 
 
 document.addEventListener('mousemove', e => {
-    console.log(e.target)
-    console.log(e.clientX, e.clientY)
+    
+    
 
     if(window.innerWidth <= 600) return
     
@@ -378,7 +378,7 @@ document.addEventListener('mousemove', e => {
         showToolTip(e.target.innerText, e.clientX, e.clientY)
     }
     else{
-        console.log("hide tool")
+        
         container_tooltip.style.setProperty("display", `none`)
     }
 
