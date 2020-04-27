@@ -2,12 +2,13 @@
     --task-width: 70%;
     --edit-width: 10%;
     --remove-width: 10%;
-    --border-radius: 4px;
+    --border-radius: 10px;
 }
 
 body{
-    background-color: orange;
+    background-color:#FF0266;
     user-select: none;
+    position: relative;
 }
 
 .container{
@@ -18,14 +19,18 @@ body{
 }
 
 h1{
-    background-color: orangered;
+    background-color: #0336FF;
     text-align: center;
     width: 50%;
 
     border-radius: var(--border-radius);
-    -webkit-box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.43);
-    -moz-box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.43);
-    box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.43);
+    -webkit-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+    -moz-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+    box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+
+    padding: 20px 0;
+    color: white;
+    width: 100%;
 }
 
 .inputs-container{
@@ -51,9 +56,11 @@ h1{
     margin: 10px;
 
     border-radius: var(--border-radius);
-    -webkit-box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.43);
-    -moz-box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.43);
-    box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.43);
+    -webkit-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+    -moz-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+    box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+
+    outline-style: unset;
 }
 
 .addTaskBtn{
@@ -67,9 +74,14 @@ h1{
 
     border-radius: var(--border-radius);
 
-    -webkit-box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.43);
-    -moz-box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.43);
-    box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.43);
+    -webkit-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+    -moz-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+    box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+
+    background-color: #0336FF;
+    color: white;
+
+    outline-style: unset;
 }
 
 
@@ -100,11 +112,12 @@ h1{
     align-items: stretch;
     
     
-    transition: all 1s;
-    -webkit-box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.43);
-    -moz-box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.43);
-    box-shadow: 0px 5px 5px 1px rgba(0,0,0,0.43);
+    transition: all .1s;
+    -webkit-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+    -moz-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+    box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
     border-radius: var(--border-radius);
+
 }
 
 .task-container-active {
@@ -113,7 +126,7 @@ h1{
 
 
 .task-container:hover{
-    transform: scale(1.1);
+    transform: scale(1.02);
     cursor: pointer;
 }
 
@@ -134,6 +147,8 @@ h1{
     padding: 10px;
 
     border-radius: var(--border-radius);
+
+    
 }
 
 .task-btns{
@@ -144,7 +159,12 @@ h1{
     flex-wrap: wrap;
     align-items: stretch;
 
-    border-radius: var(--border-radius);
+    
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+
+    
+
 }
 
 i{
@@ -161,12 +181,12 @@ i{
 */
 
 .fa-edit:hover {
-    color: rgb(50, 70, 168);
+    color: #0336FF;
     transform: scale(1.3);
 }
 
 .fa-trash-alt:hover {
-    color: red;
+    color: #FF0266;
     transform: scale(1.3);
 }
 
@@ -189,6 +209,10 @@ i:hover {
     width: 70%;
     border: none;
     padding: 10px;
+
+    border-radius: var(--border-radius);
+
+    outline-style: unset;
 }
 
 .saveBtn, .cancelBtn {
@@ -198,12 +222,12 @@ i:hover {
 
 .saveBtn:hover{
     transform: scale(1.1);
-    color: rgb(50, 70, 168);
+    color: #0336FF;
 }
 
 .cancelBtn:hover{
     transform: scale(1.1);
-    color: red;
+    color: #FF0266;
 }
 
 .edited-task{
@@ -213,33 +237,37 @@ i:hover {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+
+    border-radius: var(--border-radius);
+
+}
+
+.highlighted{
+    background-color: rgba(3, 53, 255, 0.26);
 }
 
 
 @media only screen and (max-width: 600px) {
     .task-btns{
         width: 100%;
+        border-top: 1px solid #0336FF;
     }
 
     .itemTask{
         width: calc(100% - 20px);
         overflow: visible;
         word-wrap: break-word;
-        border-bottom: 2px solid gray;
     }
 
     .edited-task{
         width: 100%;
-        border-bottom: 2px solid gray;
     }
 
     .on-edit-input{
         width: 100%;
     }
 
-    h1 {
-        width: 100%;
-    }
+    
 
     
 }
@@ -257,6 +285,50 @@ i:hover {
         width: 100%;
     }*/
 }
+
+
+
+.container-tooltip {
+    background-color: rgba(3, 53, 255, 0.74);
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+
+    -webkit-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+    -moz-box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+    box-shadow: rgba(32, 33, 36, 0.28) 0px 1px 6px 0px;
+
+    padding: 0 10px;
+
+    border-radius: var(--border-radius);
+    display: none;
+    max-width: 300px;
+    word-wrap: break-word;
+    color: white;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
